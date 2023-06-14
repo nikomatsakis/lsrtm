@@ -34,7 +34,9 @@ count: false
 
 ## All questions are welcome
 
-![no deprecatory mocking](./images/no-deprecatory-mocking.gif)
+.p40[
+    ![no deprecatory mocking](./images/no-deprecatory-mocking.gif)
+]
 
 ---
 
