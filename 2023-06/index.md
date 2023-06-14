@@ -824,9 +824,25 @@ Deadlock!
 
 ---
 
-# I have one request from you
+# How can we fix this?
 
-![see-this-coming](./images/see-this-coming.gif)
+Rule of thumb:
+
+* Put all the work into the `FuturesUnordered`
+* Or you can [spawn tasks](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=0597c6cb72dd07a8a0da4c3e3bbe8cda)
+    * [but then you can't use references](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=5d40d0885d0acdc96ebb9ab30706b96b)
+
+---
+
+# That's it!
+
+But I do have one request for you...
+
+--
+
+.p40[
+    ![see-this-coming](./images/see-this-coming.gif)
+]
 
 ---
 
