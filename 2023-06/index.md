@@ -28,6 +28,16 @@ count: false
 
 ---
 
+# How to participate
+
+## Have a question?
+
+## All questions are welcome
+
+![no deprecatory mocking](./images/no-deprecatory-mocking.gif)
+
+---
+
 # Pre-emptive thread scheduling
 
 * Traditional Java method
@@ -78,8 +88,9 @@ fn scheduler_thread() {
     ...
 
     for task in &pool_of_tasks {
-        if task.poll() indicates task is done {
-            remove task from pool of tasks
+        match task.poll() {
+            Poll::Ready(()) => /* remove task from pool of tasks */,
+            Poll::Pending => (),
         }
     }
 
@@ -221,22 +232,9 @@ Runs multiple threads.
 
 * Each tokio scheduler thread runs **one task** at a time
     * Spawning creates **new tasks** but not **new threads**
-
 --
 * If a task stalls, other tasks in the same thread are stalled
     * Multithreaded scheduler and workstealing can compensate, but only to a point
-
----
-
-# Shoutout: tokio-metrics
-
-Want to tune your scheduler or better understand what's going on?
-
-Check out the [tokio-metrics](https://docs.rs/tokio-metrics/latest/tokio_metrics/)) crate.
-
-It has some [awesome docs](https://docs.rs/tokio-metrics/latest/tokio_metrics/struct.TaskMonitor.html#why-are-my-tasks-slow) that can walk you through the process. (Shoutout to jswrenn@!)
-
-Please reach out to our team if you are having trouble tuning your application.
 
 ---
 
@@ -278,6 +276,44 @@ async fn process(data: &Mutex<Vec<String>>) {
 
 ---
 
+# Shoutout: tokio-metrics
+
+Want to tune your scheduler or better understand what's going on?
+
+Check out the [tokio-metrics](https://docs.rs/tokio-metrics/latest/tokio_metrics/)) crate.
+
+It has some [awesome docs](https://docs.rs/tokio-metrics/latest/tokio_metrics/struct.TaskMonitor.html#why-are-my-tasks-slow) that can walk you through the process.<sup>1</sup>
+
+Please reach out to our team if you are having trouble tuning your application.
+
+.footnote[
+    <sup>1</sup> Credit to the excellent jswrenn@.
+]
+
+---
+
+# Shift of topic: futures
+
+```rust
+async fn do_something() {
+    ...
+}
+```
+
+becomes
+
+```rust
+fn do_something() -> impl Future<Output = ()> {
+    async move {
+        ...
+    }
+}
+```
+
+but what is this `Future`?
+
+---
+
 template: terminology1
 
 ---
@@ -297,6 +333,24 @@ Each *task* corresponds to one or more *futures*.
 
 ---
 
+# True power of async
+
+Why limit yourself to sequential code?
+
+![Hey Square, Open your mind!](./images/hey-square-open-your-mind.gif)
+
+---
+
+# Wait, I already know async fn!
+
+Maybe you've used async functions in JavaScript.
+
+Rust async functions look similar.
+
+But there is a key difference.
+
+---
+
 # JavaScript promises
 
 ```js
@@ -310,7 +364,11 @@ async function sendRequest() { /* ... */ }
 
 ![JavaScript promise timeline](images/js-promise.drawio.svg)
 
-???
+--
+
+.line2[![Arrow](./images/Arrow.png)]
+
+.forkjs[![Arrow](./images/Arrow.png)]
 
 ---
 
@@ -326,6 +384,12 @@ async fn sendRequest() -> Result { /* ... */ }
 ```
 
 ![Rust promise timeline](images/rust-promise.drawio.svg)
+
+--
+
+.line3[![Arrow](./images/Arrow.png)]
+
+.forkrs[![Arrow](./images/Arrow.png)]
 
 ---
 
@@ -481,6 +545,26 @@ Poll method:
 
 ---
 
+
+# Rust future combinators
+
+```rust
+async fn process() {
+    let future1 = sendRequest();
+    let future2 = sendRequest();
+    let future3 = futures::future::join(future1, future2);
+    let (result1, result2) = future3.await;
+}
+
+async fn sendRequest() -> Result { /* ... */ }
+```
+
+.line5[![Arrow](images/Arrow.png)]
+
+![Rust combinator timeline](images/rust-combinator-step-4.drawio.svg)
+
+---
+
 name: f-u
 
 # `FuturesUnordered`
@@ -493,6 +577,31 @@ let first = pool.next().await;  // yields Some(r)
 let second = pool.next().await; // yields Some(r)
 let none = pool.next().await;   // none
 ```
+
+---
+
+template: f-u
+
+.line2[![Arrow](images/Arrow.png)]
+.line3[![Arrow](images/Arrow.png)]
+
+---
+
+template: f-u
+
+.line4[![Arrow](images/Arrow.png)]
+
+---
+
+template: f-u
+
+.line5[![Arrow](images/Arrow.png)]
+
+---
+
+template: f-u
+
+.line6[![Arrow](images/Arrow.png)]
 
 ---
 
@@ -560,13 +669,11 @@ template: f-u
 * Rust futures introduce *concurrency* within a task (by default)
     * You can use `tokio::spawn` to start a new task
 
-
 --
 
 
 * `FuturesUnordered` feels like a thread-pool but is not
     * The futures pushed inside only make progress when awaited
-
 
 ---
 
@@ -711,18 +818,34 @@ Deadlock!
 
 ---
 
-# Brief plug: moro
+# I have one request from you
 
-I have been experimenting with a "structured concurrency" library called [moro](https://github.com/nikomatsakis/moro/). API does not permit this sort of deadlock.
-
-[This example in moro](https://github.com/nikomatsakis/moro/blob/d6ab92c5d0f0799a0a68dcd1c3f41d6d3a517df2/examples/replicas.rs)
-
-Also supports cancellation of the entire scope, as shown [here](https://github.com/nikomatsakis/moro/blob/d6ab92c5d0f0799a0a68dcd1c3f41d6d3a517df2/examples/monitor.rs).
-
-If you want to experiment with it, it's on crates.io, happy to discuss more offline!
+![see-this-coming](./images/see-this-coming.gif)
 
 ---
 
-# Open floor
+# Survey!!
 
-Opening up the floor for any announcements.
+Please fill out the survey! Link in slack.
+
+Really helpful.
+
+---
+
+# Upcoming sessions
+
+| Date | Topic |
+| --- | --- |
+| June 28 | Observability (heap/task dumps, profiles) |
+| July | Maybe FFI, like PyO3 and JNI? |
+| August | 🏖️ |
+| September | Unsafe code and Kani |
+
+Add you or your team to the mailing list to get future invites.
+
+Is there something you'd like to hear about? Tell me!
+
+Any announcements, questions, or other topics?
+
+
+

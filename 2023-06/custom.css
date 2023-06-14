@@ -379,6 +379,22 @@ mark,
   width: 50px;
 }
 
+.forkjs img {
+  position: absolute;
+  top: 380px;
+  left: 360px;
+  width: 50px;
+  transform: rotate(130deg);
+}
+
+.forkrs img {
+  position: absolute;
+  top: 450px;
+  left: 340px;
+  width: 50px;
+  transform: rotate(130deg);
+}
+
 .line2r img {
   position: absolute;
   top: 152px;
@@ -386,6 +402,7 @@ mark,
   width: 50px;
   transform: translateX(-100%);
 }
+
 
 .line2-data img {
   position: absolute;
@@ -518,7 +535,7 @@ blockquote {
   border-left: 10px solid #ccc;
   margin: 1.5em 10px;
   padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
+  quotes: "\201C" "\201D" "\2018" "\2019";
 }
 
 blockquote:before {
