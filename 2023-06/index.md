@@ -252,6 +252,10 @@ async fn process(data: &Mutex<Vec<String>>) {
 
 ✋ Is this ok? Why?
 
+.footnote[
+    [Read more in Tokio docs](https://tokio.rs/tokio/tutorial/shared-state#on-using-stdsyncmutex)
+]
+
 ---
 
 # Fix 1: explicit drop
