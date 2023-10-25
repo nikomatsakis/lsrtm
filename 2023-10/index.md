@@ -215,10 +215,6 @@ template: cxx
 
 # py03
 
-[dtolnay/cxx](https://github.com/dtolnay/cxx)
+[pyo3](https://pyo3.rs/v0.20.0/getting_started)
 
----
-
-# py03
-
-[dtolnay/cxx](https://github.com/dtolnay/cxx)
+* `maturin build`

@@ -1,3 +1,4 @@
+// c.f. https://cxx.rs/bindings.html
 #[cxx::bridge(namespace = "org::blobstore")]
 mod ffi {
     // Shared structs with fields visible to both languages.
@@ -10,6 +11,7 @@ mod ffi {
     extern "Rust" {
         type MultiBuf;
 
+        // c.f. https://cxx.rs/binding/slice.html
         fn next_chunk(buf: &mut MultiBuf) -> &[u8];
     }
 
