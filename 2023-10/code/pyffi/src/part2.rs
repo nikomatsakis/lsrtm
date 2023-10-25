@@ -4,6 +4,6 @@ use pyo3::types::PyList;
 
 /// Formats the sum of two numbers as string.
 #[pyfunction]
-fn comma_join(a: Vec<String>) -> PyResult<String> {
+pub fn comma_join(a: Vec<String>) -> PyResult<String> {
     Ok(a.join(", "))
 }

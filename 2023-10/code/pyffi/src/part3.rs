@@ -4,7 +4,7 @@ use pyo3::types::PyList;
 
 /// Formats the sum of two numbers as string.
 #[pyfunction]
-fn comma_join_nonempty(a: Vec<String>) -> PyResult<String> {
+pub fn comma_join_nonempty(a: Vec<String>) -> PyResult<String> {
     if a.is_empty() {
         return Err(PyValueError::new_err("empty list"));
     }
