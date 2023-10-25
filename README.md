@@ -13,3 +13,4 @@ This isn't meant as a coherent course per se nor as a complete archive of slides
 * [2022-09](https://nikomatsakis.github.io/lsrtm/2022-09/) -- interior mutability
 * [2023-05](https://nikomatsakis.github.io/lsrtm/2023-05/) -- error handling
 * [2023-06](https://nikomatsakis.github.io/lsrtm/2023-06/) -- concurrency/parallelism in async
+* [2023-10](https://nikomatsakis.github.io/lsrtm/2023-10/) -- FFI
