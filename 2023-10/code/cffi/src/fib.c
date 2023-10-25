@@ -16,3 +16,13 @@ void call_rust(int n) {
     int r = factorial(n);
     printf("n = %d\n", r);
 }
+
+typedef struct {
+    int16_t a;
+    int64_t b;
+    int16_t c;
+} TestStruct;
+
+TestStruct test_struct(TestStruct* ts) {
+    return *ts;
+}
