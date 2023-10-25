@@ -1,0 +1,16 @@
+Script started on Wed Oct 25 16:57:57 2023
+python
+[1m[7m%[27m[1m[0m                                                                                                                                                                       [0m[27m[24m[J[1mmedusa[0m. [K[?2004hppython[?2004l
+Python 3.11.6 (main, Oct  3 2023, 02:51:45) [Clang 14.0.3 (clang-1403.0.22.14.1)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import pyffi
+>>> pyffi.comma_join(["a", "b", "c"])
+'a, b, c'
+>>> python [K[K[K[Kffi.commoa_[K[K[Ka_join([1, 2, 3])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: argument 'a': 'int' object cannot be converted to 'PyString'
+>>> ^D
+[1m[7m%[27m[1m[0m                                                                                                                                                                       [0m[27m[24m[J[1mmedusa[0m. [K[?2004h[?2004l
+
+Script done on Wed Oct 25 16:58:21 2023
