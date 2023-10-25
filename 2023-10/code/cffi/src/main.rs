@@ -14,6 +14,7 @@ fn part_1() {
 #[no_mangle] // <-- note this attribute
 extern "C" fn factorial(n: i32) -> i32 {
     if n == 0 {
+        // panic!("Uh oh");
         1
     } else {
         n * factorial(n - 1)
@@ -39,10 +40,11 @@ extern "C" {
 }
 
 #[derive(Debug)]
+// #[repr(C)]
 struct TestStruct {
-    a: u16,
-    b: u64,
-    c: u16,
+    a: i16,
+    b: i64,
+    c: i16,
 }
 
 fn part_3() {

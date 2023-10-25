@@ -80,9 +80,55 @@ Alternatives:
 # Special role for C
 
 * C has historically been the "lingua franca"
+* Rust can do the same!
 
 ---
 
-# 
+# PART 1: Calling C from Rust, easy case
 
-* C has historically been the "lingua franca"
+---
+
+# C FFI PART 1: Key points
+
+* `extern "C" { .. }`
+    * Unsafe to call
+* Linking
+    * If you are calling a system library, reach out and follow best practices
+
+---
+
+# C FFI PART 2: Calling Rust from C
+
+---
+
+# C FFI PART 2: Key points
+
+* An `extern "C"` Rust function uses C ABI
+* 
+* Things to watch out for
+    * Unhandled panic
+    * setjmp, longjmp, C++ exceptions
+        * Unwinding across a "C" boundary is 
+
+---
+
+# C FFI PART 3: Structures
+
+---
+
+# C FFI PART 3: Key points
+
+* Struct layout: `#[repr(C)]`
+* 
+
+---
+
+# Bindgen
+
+[rust-lang/rust-bindgen](https://rust-lang.github.io/rust-bindgen/)
+
+---
+
+# CBindgen
+
+https://github.com/mozilla/cbindgen
