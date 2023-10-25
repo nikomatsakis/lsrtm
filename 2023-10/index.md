@@ -77,6 +77,20 @@ Alternatives:
 
 ---
 
+name: outline
+
+# Outline
+
+* The bad old days
+    * Authoring calls through the C ABI
+* Modern practices
+    * cxx
+    * pyo3
+    * duchess
+* Experience report
+
+---
+
 # Special role for C
 
 * C has historically been the "lingua franca"
@@ -119,7 +133,6 @@ Alternatives:
 # C FFI PART 3: Key points
 
 * Struct layout: `#[repr(C)]`
-* 
 
 ---
 
@@ -127,8 +140,85 @@ Alternatives:
 
 [rust-lang/rust-bindgen](https://rust-lang.github.io/rust-bindgen/)
 
+Autogenerate external declarations from C header files.
+
 ---
 
 # CBindgen
 
-https://github.com/mozilla/cbindgen
+[mozilla/cbindgen](https://github.com/mozilla/cbindgen)
+
+> cbindgen creates C/C++11 headers for Rust libraries which expose a public C API.
+
+```bash
+> cargo install cbindgen
+> cbindgen
+```
+
+---
+
+# Wrapping external libraries
+
+Best practices:
+
+* Use `pkg-config` crate to probe for the library on system
+* If you want to *vendor* (package the sources):
+    * Include an env variable to disable vendoring
+    * Only do it *after* `pkg-config` has a chance to look for the library
+* Create a `foo-sys` that *just* exports the C APIs, and a `foo` that is more Rust-like and nice.
+
+---
+
+template: outline
+
+.arrow.abspos.top190.left10[![Arrow](./images/Arrow.png)]
+
+---
+
+name: cxx
+
+# cxx
+
+[dtolnay/cxx](https://github.com/dtolnay/cxx)
+
+.row[
+.bg1.column30[C++]
+.bg3.column30[Bridge]
+.bg5.column30[Rust]
+]
+
+---
+
+template: cxx
+
+.arrow.abspos.top210.left80.rotNW[![Arrow](./images/Arrow.png)]
+
+---
+
+template: cxx
+
+.arrow.abspos.top210.left550.rotNW[![Arrow](./images/Arrow.png)]
+
+---
+
+template: cxx
+
+.arrow.abspos.top210.left350.rotNW[![Arrow](./images/Arrow.png)]
+
+--
+
+* Macro generates:
+    * a header file (`main.rs.h`) C++ code can include
+    * Rust code to reflect the C++ declarations
+
+---
+
+# py03
+
+[dtolnay/cxx](https://github.com/dtolnay/cxx)
+
+---
+
+# py03
+
+[dtolnay/cxx](https://github.com/dtolnay/cxx)

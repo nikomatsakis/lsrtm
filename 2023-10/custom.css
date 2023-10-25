@@ -688,3 +688,24 @@ blockquote p {
 .speech-bubble.alan.left:after {
   border-right-color: #5914b8;
 }
+
+.bg1 {
+  background-color: #4E4187;
+  color: white;
+}
+
+.bg2 {
+  background-color: #3083DC;
+}
+
+.bg3 {
+  background-color: #75893D;
+}
+
+.bg4 {
+  background-color: #7DDE92;
+}
+
+.bg5 {
+  background-color: #2EBFA5;
+}
