@@ -114,3 +114,19 @@ TypeError: argument 'a': failed to extract enum TypeTest ('IsInt | IsString | Po
 ```
 
 # Part 7: classes
+
+# Part 8: gil
+
+```rust
+/// Length of the current list;
+#[pyfunction]
+pub fn get_list_len(py: Python<'_>) -> PyResult<usize> {
+    LIST.with(|list| match &*list.borrow() {
+        Some(l) => {
+            let l = l.as_ref(py);
+            Ok(l.len())
+        }
+        None => Err(PyValueError::new_err("no list")),
+    })
+}
+```

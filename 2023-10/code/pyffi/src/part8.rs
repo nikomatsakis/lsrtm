@@ -28,5 +28,5 @@ pub fn get_list() -> PyResult<Py<PyList>> {
 /// Length of the current list;
 #[pyfunction]
 pub fn get_list_len() -> PyResult<usize> {
-    todo!()
+    todo!("help me")
 }
