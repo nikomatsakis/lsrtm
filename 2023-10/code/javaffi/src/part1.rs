@@ -5,8 +5,9 @@ use duchess::Global;
 pub fn main() -> anyhow::Result<()> {
     // Q: What happens if we remove `global` and why?
     // Q: What does the Err represent?
+    // Q: what if we change from `"/foo"` to `"/"`?
     let request: Global<auth::HttpRequest> =
-        auth::HttpRequest::new("GET", "/").global().execute()?;
+        auth::HttpRequest::new("GET", "/foo").global().execute()?;
 
     let auth: Global<auth::Authenticated> = auth::HttpAuth::new()
         .authenticate(&request)
