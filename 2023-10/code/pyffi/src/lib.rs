@@ -20,5 +20,8 @@ fn pyffi(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(part5::make_tuple_struct, m)?)?;
     m.add_function(wrap_pyfunction!(part6::type_test, m)?)?;
     m.add_class::<part7::Character>()?;
+    m.add_function(wrap_pyfunction!(part8::stash_list, m)?)?;
+    m.add_function(wrap_pyfunction!(part8::get_list, m)?)?;
+    m.add_function(wrap_pyfunction!(part8::get_list_len, m)?)?;
     Ok(())
 }

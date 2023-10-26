@@ -265,6 +265,10 @@ fn pyffi(_py: Python, m: &PyModule) -> PyResult<()> {
 '66'
 ```
 
+.footnote[
+    Try `help(pyffi.sum_as_string)` -- neat!
+]
+
 ---
 
 # Part 2: more complex types
@@ -305,6 +309,21 @@ pub fn comma_join_nonempty(a: Vec<String>) -> PyResult<String> {
 #[pyfunction]
 pub fn comma_join_py(a: &PyList) -> PyResult<String> { }
 ```
+
+---
+
+# Part4b: calling Python functions from Rust
+
+```rust
+let fun: &PyAny = ...
+fun.call0(py)?;
+fun.call1(py, (arg1, arg2, arg3))?;
+fun.call3(py, arg1, arg2, arg3)?;
+```
+
+.footnote[
+    [More here](https://pyo3.rs/v0.20.0/python_from_rust)
+]
 
 ---
 
