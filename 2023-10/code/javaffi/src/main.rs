@@ -1,7 +1,3 @@
-use duchess::{java, prelude::*, Global};
-use std::collections::HashMap;
-use thiserror::Error;
-
 duchess::java_package! {
     package auth;
 
@@ -15,6 +11,9 @@ duchess::java_package! {
     class AuthenticationExceptionInvalidSignature { * }
 }
 
-fn main() {
-    println!("Hello, world!");
+mod part1;
+
+fn main() -> anyhow::Result<()> {
+    part1::main()?;
+    Ok(())
 }

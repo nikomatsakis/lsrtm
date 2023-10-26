@@ -283,6 +283,7 @@ dependencies = [
 name = "javaffi"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "duchess",
  "thiserror",
 ]
