@@ -177,9 +177,7 @@ template: outline
 
 name: cxx
 
-# cxx
-
-[dtolnay/cxx](https://github.com/dtolnay/cxx)
+# [dtolnay/cxx](https://github.com/dtolnay/cxx)
 
 .row[
 .bg1.column30[C++]
@@ -191,25 +189,49 @@ name: cxx
 
 template: cxx
 
-.arrow.abspos.top210.left80.rotNW[![Arrow](./images/Arrow.png)]
+.arrow.abspos.top150.left80.rotNW[![Arrow](./images/Arrow.png)]
 
 ---
 
 template: cxx
 
-.arrow.abspos.top210.left550.rotNW[![Arrow](./images/Arrow.png)]
+.arrow.abspos.top150.left550.rotNW[![Arrow](./images/Arrow.png)]
 
 ---
 
 template: cxx
 
-.arrow.abspos.top210.left350.rotNW[![Arrow](./images/Arrow.png)]
+.arrow.abspos.top150.left350.rotNW[![Arrow](./images/Arrow.png)]
+
+--
+
+You supply:
+
+```rust
+#[cxx::bridge(namespace = "org::blobstore")]
+mod ffi {
+    struct BlobMetadata {...} // Shared structs visible to both languages
+    extern "Rust" {...} // Rust types and signatures exposed to C++.
+    unsafe extern "C++" {...} // C++ types and signatures exposed to Rust
+}
+```
 
 --
 
 * Macro generates:
     * a header file (`main.rs.h`) C++ code can include
     * Rust code to reflect the C++ declarations
+    * Code to check your C++ signatures are correctly transcribed
+
+---
+
+# cxx demo
+
+---
+
+template: outline
+
+.arrow.abspos.top260.left40[![Arrow](./images/Arrow.png)]
 
 ---
 
@@ -217,4 +239,124 @@ template: cxx
 
 [pyo3](https://pyo3.rs/v0.20.0/getting_started)
 
-* `maturin build`
+* install `pyenv` and create an environment
+* `pyenv activate pyo3`
+* `pip install maturin`
+* `maturin develop` to build the sources
+
+---
+
+# Part 1: basics of exposing Rust fns to Python
+
+```rust
+#[pyfunction]
+pub fn sum_as_string(a: usize, b: usize) -> PyResult<String> {...}
+
+#[pymodule]
+fn pyffi(_py: Python, m: &PyModule) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
+}
+```
+
+```bash
+> python -q
+>>> import pyffi
+>>> pyffi.sum_as_string(22, 44)
+'66'
+```
+
+---
+
+# Part 2: more complex types
+
+```rust
+#[pyfunction]
+pub fn comma_join(a: Vec<String>) -> PyResult<String> {
+    Ok(a.join(", "))
+}
+```
+
+.arrow.abspos.top190.left10[![Arrow](./images/Arrow.png)]
+
+
+.footnote[
+    [Full set of conversions](https://pyo3.rs/v0.20.0/conversions/tables)
+]
+
+---
+
+# Part 3: exceptions and errors
+
+```rust
+#[pyfunction]
+pub fn comma_join_nonempty(a: Vec<String>) -> PyResult<String> {
+    if a.is_empty() {
+        return Err(PyValueError::new_err("empty list"));
+    }
+    Ok(a.join(", "))
+}
+```
+
+---
+
+# Part 4: interacting with Python values
+
+```rust
+#[pyfunction]
+pub fn comma_join_py(a: &PyList) -> PyResult<String> { }
+```
+
+---
+
+# Part 5: deriving `FromPyObject` on structs
+
+```rust
+#[derive(FromPyObject)]
+pub struct RustyStruct {
+    my_string: String,
+}
+
+#[pyfunction]
+pub fn make_struct(a: RustyStruct) -> PyResult<String> {}
+```
+
+* You get:
+    * field-by-field "duck typed" conversion
+
+---
+
+# Part 6: deriving `FromPyObject` on enums
+
+```rust
+#[derive(FromPyObject, Debug)]
+pub enum TypeTest {
+    ...
+}
+```
+
+* You get:
+    * attempts to check against multiple types
+
+---
+
+# Part 7: defining Python classes
+
+```rust
+#[pyclass(frozen)]
+pub struct Character {
+    name: String,
+    age: u32,
+}
+
+#[pymethods] impl Character { ... }
+```
+
+* Python is GC'd:
+    * How does that map to Rust?
+    * What does that mean for mutating fields?
+
+---
+
+# Part 8: persisting Python references
+
+

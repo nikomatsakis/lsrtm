@@ -1,8 +1,12 @@
+# Setup
+
 To setup the environment:
 
 ```bash
 > pyenv activate pyo3
 ```
+
+# Part 1
 
 Then look at the first function, `sum_as_string`, and the way it is added to the module.
 
@@ -16,7 +20,9 @@ Type "help", "copyright", "credits" or "license" for more information.
 '66'
 ```
 
-Now look at `comma_join0`, which takes a `Vec`
+# Part 2
+
+Now look at `comma_join`, which takes a `Vec`
 
 ```bash
 > python
@@ -31,8 +37,11 @@ Traceback (most recent call last):
 TypeError: argument 'a': 'int' object cannot be converted to 'PyString'
 ```
 
+Now open https://pyo3.rs/v0.20.0/conversions/tables
 
-Now look at `comma_join1`, which returns an error
+# Part 3
+
+Now look at `comma_join_nonempty`, which returns an error
 
 ```bash
 > python         
@@ -47,11 +56,13 @@ ValueError: empty list
 
 There are also options for propagating Rust errors.
 
-Now open https://pyo3.rs/v0.20.0/conversions/tables
+# Part 4
 
 Now look at `comma_join_py`
 
-Now loko at `make_struct`
+# Part 5
+
+Now look at `make_struct`
 
 ```bash
 > python
@@ -66,6 +77,8 @@ AttributeError: 'Foo' object has no attribute 'my_string'
 >>> pyffi.make_struct(o)
 'hi'
 ```
+
+# Part 6: enums
 
 ```
 > python
@@ -99,3 +112,5 @@ TypeError: argument 'a': failed to extract enum TypeTest ('IsInt | IsString | Po
 - variant IsString (IsString): TypeError: failed to extract field TypeTest::IsString.0, caused by TypeError: 'Point' object cannot be converted to 'PyString'
 - variant Point (Point): TypeError: failed to extract field TypeTest::Point.x, caused by TypeError: 'str' object cannot be interpreted as an integer
 ```
+
+# Part 7: classes
