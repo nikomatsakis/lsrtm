@@ -87,6 +87,7 @@ name: outline
     * cxx
     * pyo3
     * duchess
+    * others
 * Experience report
 
 ---
@@ -235,9 +236,7 @@ template: outline
 
 ---
 
-# py03
-
-[pyo3](https://pyo3.rs/v0.20.0/getting_started)
+# [py03](https://pyo3.rs/v0.20.0/getting_started)
 
 * install `pyenv` and create an environment
 * `pyenv activate pyo3`
@@ -374,8 +373,64 @@ pub struct Character {
     * How does that map to Rust?
     * What does that mean for mutating fields?
 
+.footnote[
+    There is also `#[pyclass]` without frozen. I don't like it.
+]
+
 ---
 
 # Part 8: persisting Python references
 
+---
 
+template: outline
+
+.arrow.abspos.top290.left40[![Arrow](./images/Arrow.png)]
+
+---
+
+# [Duchess](https://duchess-rs.github.io/duchess/)
+
+.p60[![Duchess logo](./images/duchess-logo.png)]
+
+* In-progress crate for easy Java-Rust interop
+* More focused on invoking Java from Rust
+* Some support for the reverse, more to come
+
+---
+
+# [Duchess](https://duchess-rs.github.io/duchess/)
+
+.p40[![Duchess devs](./images/duchess-devs.png)]
+
+Want to help?
+
+---
+
+# [Duchess](https://duchess-rs.github.io/duchess/)
+
+---
+
+template: outline
+
+.arrow.abspos.top325.left30[![Arrow](./images/Arrow.png)]
+
+---
+
+# Others
+
+* JavaScript: [neon](https://neon-bindings.com/), [napi-rs](https://napi.rs/)
+    * neon: more oriented at fine-grained interop
+    * napi-rs: more oriented at "convert to Rust and get out"
+--
+* Ruby: [magnus](https://github.com/matsadler/magnus), [helix](https://usehelix.com/)
+    * not really sure what is the 'new hotness' here
+--
+* Go: [demo of using cgo](https://github.com/mediremi/rust-plus-golang), [blog post about rustgo](https://words.filippo.io/rustgo/)
+    * as far as I can tell, "roll your own" with cgo is state of the art
+
+---
+
+template: outline
+
+.arrow.abspos.top360.left10[![Arrow](./images/Arrow.png)]
